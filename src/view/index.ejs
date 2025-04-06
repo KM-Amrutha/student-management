@@ -6,7 +6,6 @@
 <body>
   <h1>Student Management System</h1>
 
-  <!-- CREATE / UPDATE FORM -->
   <form id="studentForm" method="POST">
     <input type="text" name="name" placeholder="Name" required />
     <input type="email" name="email" placeholder="Email" required />
@@ -16,20 +15,20 @@
     <button type="submit" id="submitBtn">Add Student</button>
   </form>
 
-  <!-- LIST OF STUDENTS -->
+
   <h2>All Students</h2>
   <ul>
     <% students.forEach((student) => { %>
       <li>
         <strong><%= student.name %></strong> - <%= student.email %> - <%= student.phone %> - <%= student.department %>
 
-        <!-- DELETE FORM -->
+      
         <form action="/api/student/<%= student._id %>?_method=DELETE" method="POST" style="display:inline;">
           <button type="submit">Delete</button>
         </form>
 
-        <!-- UPDATE BUTTON -->
-        <button onclick='editStudent("<%= student._id %>", "<%= student.name %>", "<%= student.email %>", "<%= student.phone %>", "<%= student.department %>")'>
+        <button onclick='editStudent("<%= student._id %>", "<%= student.name %>", "<%= student.email %>",
+         "<%= student.phone %>", "<%= student.department %>")'>
           Edit
         </button>
       </li>
@@ -37,6 +36,7 @@
   </ul>
 
   <script>
+    
     let form = document.getElementById("studentForm");
     let submitBtn = document.getElementById("submitBtn");
 
@@ -54,7 +54,7 @@
 
     form.addEventListener("submit", (e) => {
       if (!editingId) {
-        form.action = "/create-student"; // fallback if no editing
+        form.action = "/create-student";
       }
     });
   </script>

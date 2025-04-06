@@ -11,26 +11,21 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Connect to MongoDB
 connectDB();
 
-// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Fix is here 👇
 app.use(methodOverride("_method"));
 
 app.use(express.static("public"));
 
-// View Engine
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "view"));
 
-// API Routes
 app.use("/api", studentRoutes);
 
-// Render EJS index page with student data
 app.get("/", async (req, res) => {
   try {
     const students = await studentModel.find();
@@ -51,8 +46,6 @@ app.post("/create-student", async (req, res) => {
   }
 });
 
-
-// Start Server
 app.listen(PORT, () => {
-  console.log(`🚀 Student Management App running at http://localhost:${PORT}`);
+  console.log(`Student Management App running at http://localhost:${PORT}`);
 });
